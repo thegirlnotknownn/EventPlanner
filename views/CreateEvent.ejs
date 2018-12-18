@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CREATE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        var x = 1;
+        $(document).ready(function(){
+            $("#click_add_input").click(function(){
+                x++;
+                console.log(x);
+                $("#add_input").append("<input type=\"file\" name=\"file\"><br/>");
+                document.getElementById("x").value = x;
+            });
+            $("#file").change(function(){
+                document.getElementById("x").value = x;
+            });
+        });
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">AR EVENTS</a>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="collapse navbar-collapse" id="mainNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/CreateEvent">Create</a></li>
+                <li><a href="/EditEvent">Edit</a></li>
+                <li><a href="/ViewEvent/ViewEvent">View</a></li>
+                <li><a href="/ContactUs">Contact</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<center>
+<div class="container">
+    <h2 style="text-align: center;"><b> ADD YOUR EVENT</b></h2>
+
+    
+    <br/>
+
+    <form method="POST" action="/CreateEvent/CreateEvent" enctype="multipart/form-data" class= "form-horizontal">
+    <div class="row">
+
+        <div>
+            <h4> Upload Your Profile Pic</h4>
+            <input type="file" name="file" id="file">
+            <div id="add_input"></div>
+        </div>
+
+        <div>
+            <a href="#" id="click_add_input">+</a>
+        </div>
+
+        <hr>
+        <div class="form-group">
+            <div>
+                <label> &nbsp Type Of Event </label><br> &nbsp
+                <select id="type" name="type">                    
+                    <option value="Concert" id="Concert" name="Concert">Concert</option>
+                    <option value="Show" id="Show" name="Show">Show</option>
+                    <option value="Party" id="Party" name="Party">Party</option>
+                    <option value="Buffet" id="Buffet" name="Buffet">Buffet</option>
+                    <option value="Others" id="Others" name="Others">Others</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label>  &nbsp Name </label><br>&nbsp
+                <input type ="text" id="name" name="name" placeholder="Enter your name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label>  &nbsp Contact Number </label><br> &nbsp
+                <input type ="Number" id="contact" name="contact" placeholder="Enter your Phone Number">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label>  &nbsp Email</label><br> &nbsp
+                <input type="text" id="email" name="email" placeholder="Enter your email">
+            </div>
+        </div>
+
+        <br>
+        <div>
+            <h4>  &nbsp Mark your location:</h4>
+            <div id="map" style="width: 320px; height: 320px;"> </div>            
+        </div>
+        <br>
+         &nbsp
+        <div class="form-group">
+            <div>
+                <input type="textbox" name="address" id="address" placeholder="Enter your address">
+            </div>
+        </div>
+
+        <input type="hidden" name="x" id="x" value="0" />
+        <input type="hidden" id="lat" name="lat" value=""/>
+        <input type="hidden" id="lng" name="lng" value=""/>
+        <br/>
+
+        <div>
+            <br> &nbsp  
+            <button type="submit" class="btn btn-success"><b>SUBMIT</b></button>
+        </div>
+        <br><br>
+    </div>
+    </form>
+</div>
+    <br>
+        <script>
+
+
+            function initMap(){
+
+                var myCenter = new google.maps.LatLng(20.296059,85.824539);
+                var mapCanvas = document.getElementById("map");
+                var mapOptions = {
+                    center: myCenter, 
+                    zoom: 8,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(mapCanvas,mapOptions);
+
+                var marker = new google.maps.Marker({
+                    position: myCenter,
+                    map: map,
+                    draggable: true
+                });
+                document.getElementById('lat').value = "20.296059";
+                document.getElementById('lng').value = "85.824539"; 
+
+                var geocoder = new google.maps.Geocoder();
+
+                
+                console.log("here----");
+                console.log(lat.value);
+                console.log(lng);
+
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+
+                    document.getElementById("lat").value = event.latLng.lat();
+
+                    document.getElementById("lng").value = event.latLng.lng();
+
+                    console.log(lat);
+                    console.log(lng);
+ 
+                    geocodeLatLng(geocoder,map,lat,lng);
+
+                });
+            }
+
+            function geocodeLatLng(geocoder,map,lat,lng)
+                    {
+                        var input = lat.value+","+lng.value;
+                        console.log(input);
+                        var latlngStr = input.split(',', 2);
+                        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+                        console.log(latlng);
+                        geocoder.geocode({'location': latlng}, function(results, status) {
+                          if (status === 'OK') {
+                            console.log("in the okay status");
+                            console.log(results[1].formatted_address);
+                            console.log(results[0].formatted_address);
+                            if (results[1]) {
+                                document.getElementById("address").value = results[1].formatted_address;                          
+                            }
+                            else {
+                              window.alert('No results found');
+                                }
+                          } 
+                          else {
+                            window.alert('Geocoder failed due to: ' + status);
+                          }
+                        });
+                    }
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzWRhHLDOdCAT8P1TVpUW4io22XYnVjoU&callback=initMap"></script>
+</center>
+</body>
+</html>     

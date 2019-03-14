@@ -62,5 +62,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-console.log("Server is Up and Running!");
+console.log("Server is Up and Running On Port 3002!");
 module.exports = app;

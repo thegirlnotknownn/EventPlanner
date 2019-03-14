@@ -28,33 +28,29 @@ router.get('/',function (req,res) {
 
 //saving dataaaa
 router.post('/CreateEvent',upload.any(), function (req,res){
-        var newUser = new User({
-          name:req.body.name,
-          contact:req.body.contact,
-          email:req.body.email,
-          address:req.body.address,
-          type:req.body.type,
-          lat:req.body.lat,
-          lng:req.body.lng
-        });
-        newUser.save(function(err,data){
-          if(err) return console.log(err)
-            console.log(data);
-            console.log("Data saved!");
-            for(var i=0;i<req.body.x;i++)
-            {
-              var newImage = new Image({
-                  id : newUser._id,
-                  path: req.files[i].path,
-                  originalname:req.files[i].originalname
-            });
-            console.log(newImage);
-            newImage.save();
-            console.log("Image path saved");
-          }
-        });
-        return res.redirect('/CreateEvent');
+  var newUser = new User({
+    name:req.body.name,
+    contact:req.body.contact,
+    email:req.body.email,
+    address:req.body.address,
+    type:req.body.type,
+    lat:req.body.lat,
+    lng:req.body.lng
+  });
+  newUser.save(function(err,data){
+    if(err) return console.log(err)
+    // console.log(data);
+    for(var i=0;i<req.body.x;i++){
+      var newImage = new Image({
+        id : newUser._id,
+        path: req.files[i].path,
+        originalname:req.files[i].originalname
+      });
+    // console.log(newImage);
+      newImage.save();
+    }
+  });
+  return res.redirect('/CreateEvent');
 });
 
-console.log("Server is Up and Running3");
 module.exports = router;

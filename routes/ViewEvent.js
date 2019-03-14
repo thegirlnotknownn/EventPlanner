@@ -7,46 +7,43 @@ var bodyParser = require('body-parser');
 var Image = require('../models/Imagedata');
 var User = require('../models/Userdata');
 
-
 //view all events
 router.get('/ViewEvent',function (req, res) {
   User.find({}, function (err, docs) {
     if(err) return console.error(err)
-    console.log(docs);
+    // console.log(docs);
     res.render('ViewEvent',{
       docs:docs
     })
-  });
+  }).lean();
 });
 
-
-//for toggled images
+//for toggling images
 router.get('/display',function(req,res){
   var entry_id = req.query.id;
-  console.log(entry_id);
+  // console.log(entry_id);
   User.find({},function(err,docs){
     if(err) return console.error(err);
-    console.log("user in find docs id");
-    console.log(docs[entry_id]._id);
+    // console.log("user in find docs id");
+    // console.log(docs[entry_id]._id);
       Image.find({'id': docs[entry_id]._id},function(err,data){
         if(err) return console.error(err);
-       console.log(data);
-       res.send(data); 
-      });
-  });
+      //  console.log(data);
+       res.send(data);
+      }).lean();
+  }).lean();
 });
 
-//for toggled maps
+//for toggling maps
 router.get('/latlng',function(req,res){
-    console.log(req.query.current);
+    // console.log(req.query.current);
     var x = req.query.current;
     User.find({},function (err, docs) {
     if (err) return console.error(err);
-    console.log(docs[x].lat);
-    console.log(docs[x].lng);
+    // console.log(docs[x].lat);
+    // console.log(docs[x].lng);
     res.send(docs[x]);
     });
 });
 
-console.log("Server is Up and Running2!")
 module.exports = router;

@@ -1,77 +1,67 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= title %></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-
-        <!-- Logo -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">AR EVENTS</a>
+    <head>
+        <title><%= title %></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">AR EVENTS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="mainNavBar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/CreateEvent">Create</a></li>
+                    <li><a href="/EditEvent">Edit</a></li>
+                    <li><a href="/ViewEvent/ViewEvent">View</a></li>
+                    <li><a href="/ContactUs">Contact</a></li>
+                </ul>
+            </div>
         </div>
-
-        <!-- Menu Items -->
-        <div class="collapse navbar-collapse" id="mainNavBar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/CreateEvent">Create</a></li>
-                <li><a href="/EditEvent">Edit</a></li>
-                <li><a href="/ViewEvent/ViewEvent">View</a></li>
-                <li><a href="/ContactUs">Contact</a></li>
-            </ul>
-        </div>
-
-    </div>
-</nav>
-
-<section class="delete"> 
-    <h2 style="text-align: center;">DELETE USER EVENT</h2>
-    <form action="/EditEvent/DeleteEvent" method="post">        
-        <div class="input">
-            <label for="email"> &nbsp Email</label> <br>&nbsp&nbsp
-            <input type="text" name="email">
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <button style="text-align: center;" type="submit">DELETE</button>
-
-        </div>
-    </form>
-</section>
+    </nav>
+    <section class="delete"> 
+        <h2 style="text-align: center;">DELETE USER EVENT</h2>
+        <form action="/EditEvent/DeleteEvent" method="post">        
+            <div class="input">
+                <label for="email"> &nbsp Email</label> <br>&nbsp&nbsp
+                <input type="text" name="email">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button style="text-align: center;" type="submit">DELETE</button>
+            </div>
+        </form>
+    </section>
 <br><br><br>
 <hr>
-<section class="update">
-<h2 style="text-align: center;">UPDATE USER EVENT DETAILS</h2>
-<form action="/EditEvent/UpdateEvent" method="post">
-    <div class="input">
-    <label for="email"> &nbsp Email</label><br>&nbsp&nbsp
-    <input type="text" name="email">
-    </div>
-    <br>
-    <div class="input">
-        <label for="name"> &nbsp Name</label><br>&nbsp&nbsp
-        <input type="text" name="name">
-    </div>
-    <br>
-    <div class="input">
-        <label for="contact"> &nbsp Contact</label><br>&nbsp&nbsp
-        <input type="Number" name="contact">
-    </div>
-     <br><br>&nbsp
-
-    <button style="text-align: center;" type="submit">UPDATE</button>
-</form>
-</section>
-
-</body>
+<!-- when a particular user gonna signin/signup then do fill the data fields with the last data and then update changing them!! -->
+    <section class="update">
+    <h2 style="text-align: center;">UPDATE USER EVENT DETAILS</h2>
+    <form action="/EditEvent/UpdateEvent" method="post">
+        <div class="input">
+            <label for="email"> &nbsp Email</label><br>&nbsp&nbsp
+            <input type="text" name="email">
+        </div>
+        <br>
+        <div class="input">
+            <label for="name"> &nbsp Name</label><br>&nbsp&nbsp
+            <input type="text" name="name">
+        </div>
+        <br>
+        <div class="input">
+            <label for="contact"> &nbsp Contact</label><br>&nbsp&nbsp
+            <input type="Number" name="contact">
+        </div>
+        <br><br>&nbsp
+        <button style="text-align: center;" type="submit">UPDATE</button>
+    </form>
+    </section>
+    </body>
 </html>
